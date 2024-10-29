@@ -1,4 +1,5 @@
 const { projetos } = require("./projetos");
+var validator = require('validator');
 // editar projeto
 
 function editarProjeto(id, novoNome, novaDescricao, novaDataInicio, novaDataFim, novoGerenteProjeto, novosMembrosEquipe, novoStatus) {
@@ -7,6 +8,20 @@ function editarProjeto(id, novoNome, novaDescricao, novaDataInicio, novaDataFim,
         const projeto = projetos.find(projeto => 
             projeto.id === id
         );
+
+        if(
+            validator.isEmpty(id) ||
+            validator.isEmpty(novoNome) ||
+            validator.isEmpty(novaDescricao) ||
+            validator.isEmpty(novaDataInicio) ||
+            validator.isEmpty(novaDataFim) ||
+            validator.isEmpty(novoGerenteProjeto) ||
+            validator.isEmpty(novosMembrosEquipe) ||
+            validator.isEmpty(novoStatus)
+        ){
+            console.error("Todos os dados precisam estar preenchidos");
+            return;
+        }
 
         if (projeto) {
             projeto.nome = novoNome,
@@ -23,7 +38,7 @@ function editarProjeto(id, novoNome, novaDescricao, novaDataInicio, novaDataFim,
         }
 
     } catch (error) {
-        console.error("Não foi possível editar o projeto", error.mssage)
+        console.error("Não foi possível editar o projeto", error.message);
     }
 }
 

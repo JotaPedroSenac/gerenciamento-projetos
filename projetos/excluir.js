@@ -1,9 +1,16 @@
 const { projetos } = require("./projetos");
+var validator = require('validator');
 
 // excluir Projeto
 
 function excluirProjeto(id) {
     try {
+
+        if(validator.isEmpty(id)){
+            console.error("O id precisa ser preenchido");
+            return;
+        }
+        
         const indice = projetos.findIndex(projeto => 
             projeto.id === id
         );

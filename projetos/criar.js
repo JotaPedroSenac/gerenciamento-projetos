@@ -1,4 +1,5 @@
 const { projetos } = require("./projetos");
+var validator = require('validator');
 // criar projeto
 
 function criarProjeto(id, nome, descricao, dataInicio, dataFim, gerenteProjeto, membrosEquipe, status) {
@@ -12,6 +13,20 @@ function criarProjeto(id, nome, descricao, dataInicio, dataFim, gerenteProjeto, 
             gerenteProjeto: gerenteProjeto,
             membrosEquipe: membrosEquipe, 
             status: status
+        }
+
+        if (
+            validator.isEmpty(id) ||
+            validator.isEmpty(nome) ||
+            validator.isEmpty(descricao) ||
+            validator.isEmpty(dataInicio) ||
+            validator.isEmpty(dataFim) ||
+            validator.isEmpty(gerenteProjeto) ||
+            validator.isEmpty(membrosEquipe) ||
+            validator.isEmpty(status)
+        ) {
+            console.error("Todos os dados precisam ser preenchidos");
+            return;
         }
 
         projetos.push(novoProjeto);
